@@ -1,0 +1,41 @@
+<ion-view class="splashView">
+  <ion-content padding="true" padding-vertical>
+    <div class="row row-center">
+      <div class="col text-center">
+        <h1>Get It, Got It</h1>
+        <h3>Redefining the interactive classroom</h3>
+        <p>Use the buttons below to sign up with facebook or an email and password.</p>
+        <p>(Existing users, just sign in with your credentials!)</p>
+      </div>
+    </div>
+    <div class="row row-center">
+      <div class="col col-center text-center">
+        <button class="button button-positive" role="button" ng-click="loginWithFacebook()" ng-disabled="loggingIn" >{{loggingIn ? 'Logging In' : 'Login With Facebook'}}</button>
+      </div>
+      <div class="col col-center text-center">
+        <button class="button button-stable" type="button" ng-click="openModal($event)">Login With Email</button>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
+
+<script id="my-modal.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title">Enter Your Email And Password Below</h1>
+    </ion-header-bar>
+    <ion-content>
+      <div class="list list-inset">
+        <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input type="email" class="form-control" id="loginEmail" placeholder="Email" ng-model="user.email">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Password</span>
+          <input type="password" class="form-control" id="loginPassword" placeholder="Password" ng-model="user.password">
+        </label>
+        <button type="submit" class="button button-full button-balanced" ng-click="loginWithEmail(user)" ng-disabled="loggingIn" >{{loggingIn ? 'Logging In' : 'Login'}}</button>
+      </div>
+    </ion-content>
+  </ion-modal-view>
+</script>

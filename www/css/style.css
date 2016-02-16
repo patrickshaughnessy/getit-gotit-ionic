@@ -1,1 +1,11 @@
 /* Empty. Add your own CSS if you like */
+.splashView {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../img/pencils.jpg');
+  background-repeat: no-repeat;
+  background-size:cover;
+  color: white;
+}
+
+.splashView h1, .splashView h3 {
+  color: white;
+}
