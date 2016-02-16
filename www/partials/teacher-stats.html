@@ -1,0 +1,155 @@
+<ion-view class="teacherStatsView">
+  <ion-nav-buttons side='primary'>
+    <button class="button icon icon-left" nav-direction="back" ui-sref="home">
+      <i class="icon ion-chevron-left"></i>
+      Home
+    </button>
+  </ion-nav-buttons>
+  <ion-nav-title>
+    Stats
+  </ion-nav-title>
+
+  <ion-content>
+
+    <div class="card text-center">
+      <div class="item item-divider item-positive">
+        <h2 class="stable">Stats For {{user.name}}</h2>
+      </div>
+      <div class="item item-text-wrap">
+        <div class="row">
+          <div class="col col-center"><h2>Average Students Per Class</h2></div>
+          <div class="col col-center"><h2>Average Comprehension Rate</h2></div>
+          <div class="col col-center"><h2>Total Classes Taught</h2></div>
+          <div class="col col-center"><h2>Total Students Taught</h2></div>
+        </div>
+        <div class="row">
+          <div class="col col-center"><p>{{averageStudentsPerClass}}</p></div>
+          <div class="col col-center"><p>{{averageComprehensionPerClass}}</p></div>
+          <div class="col col-center"><p>{{totalClassesTaught}}</p></div>
+          <div class="col col-center"><p>{{totalStudentsTaught}}</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="list card text-center">
+      <div class="item item-divider item-positive">
+        <h2 class="stable">View A Class</h2>
+      </div>
+      <div class="card" ng-repeat="class in classesData | orderBy:'-time'">
+        <div class="item item-divider item-icon-right item-stable" ng-click="toggleClass(class.id)" >
+          <h2>{{class.time | date : 'MMMM d, yyyy'}} at {{class.time | date : 'shortTime'}}</h2>
+          <i class="icon icon-accessory" ng-class="{'ion-chevron-right': showingClassID !== class.id, 'ion-chevron-down': showingClassID === class.id}"></i>
+        </div>
+        <div class="item text-center item-text-wrap" ng-show="showingClassID === class.id">
+          <h3>Now viewing class data from</h3>
+          <h1>{{currentClassTime | date : 'medium'}}</h1>
+          <div class="row responsive-sm">
+            <div class="col col-center">
+              <h2>Comprehension Rate During Class</h2>
+              <percentage-graph data="{{currentClassData}}"></percentage-graph>
+            </div>
+            <div class="col col-center text-left">
+              <div class="row row-center">
+                <div class="col col-center"><h2>Total Students</h2></div>
+                <div class="col col-center text-center"><h2>:</h2></div>
+                <div class="col col-center"><p>{{totalStudents}}</p></div>
+              </div>
+              <div class="row row-center">
+                <div class="col col-center"><h2>Average Comprehension Rate</h2></div>
+                <div class="col col-center text-center"><h2>:</h2></div>
+                <div class="col col-center"><p>{{avgComp}}%</p></div>
+              </div>
+              <div class="row row-center">
+                <div class="col col-center"><h2>Duration</h2></div>
+                <div class="col col-center text-center"><h2>:</h2></div>
+                <div class="col col-center"><p>{{duration}}</p></div>
+              </div>
+              <div class="row row-center">
+                <div class="col col-center"><h2>Total Points</h2></div>
+                <div class="col col-center text-center"><h2>:</h2></div>
+                <div class="col col-center"><p>{{classPoints}}</p></div>
+              </div>
+              <div class="row row-center">
+                <div class="col col-center text-center">
+                  <h2>Students:</h2>
+                </div>
+              </div>
+              <div class="row row-center">
+                <div class="col">
+                  <div class="list card" ng-repeat="student in studentList | orderBy:'name'">
+                    <div class="item item-divider item-icon-right item-stable" ng-click="toggleStudent(student.id)">
+                      <h2 class="text-center">{{student.name}}</h2>
+                      <i class="icon icon-accessory" ng-class="{'ion-chevron-right': showingStudentID !== student.id, 'ion-chevron-down': showingStudentID === student.id}"></i>
+                    </div>
+                    <div class="item text-center item-avatar item-text-wrap" ng-show="showingStudentID === student.id">
+                      <img class="studentProfileImg" ng-src="{{studentStats.studentInfo.avatar}}" alt="Profile Pic">
+                      <div class="row row-center">
+                        <div class="col col-center"><h4>Total Time In Class</h4></div>
+                        <div class="col col-center text-center"><h2>:</h2></div>
+                        <div class="col col-center"><p>{{studentStats.totalTimeInClass}}</p></div>
+                      </div>
+                      <div class="row row-center">
+                        <div class="col col-center"><h4>Time As Helpee</h4></div>
+                        <div class="col col-center text-center"><h2>:</h2></div>
+                        <div class="col col-center"><p>{{studentStats.helpeeTime}}</p></div>
+                      </div>
+                      <div class="row row-center">
+                        <div class="col col-center"><h4>Time As Helper</h4></div>
+                        <div class="col col-center text-center"><h2>:</h2></div>
+                        <div class="col col-center"><p>{{studentStats.helperTime}}</p></div>
+                      </div>
+                      <div class="row row-center">
+                        <div class="col col-center"><h4>Average Comprehension Rate</h4></div>
+                        <div class="col col-center text-center"><h2>:</h2></div>
+                        <div class="col col-center"><p>{{studentStats.avgComprehensionRate}}</p></div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <button class="button button-full button-positive" ng-click="openModal()">Chat History</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script id="chat-modal.html" type="text/ng-template">
+      <ion-modal-view>
+        <ion-header-bar>
+          <h1 class="title">{{studentStats.studentInfo.name}}s Chat History</h1>
+          <button class="button icon icon-right icon-accessory" ng-click="closeModal()">
+            <i class="icon icon-right ion-close-round"></i>
+          </button>
+        </ion-header-bar>
+        <ion-content>
+          <div class="row text-center">
+            <div class="col">
+              <h4 ng-if="studentStats.chatHistory.helpeeChats.length">As Helpee</h4>
+            </div>
+            <div class="col">
+              <h4 ng-if="studentStats.chatHistory.helperChats.length">As Helper</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <ul ng-repeat="chat in studentStats.chatHistory.helpeeChats">
+                <li ng-repeat="message in chat.messages">{{displayMessage(message)}}</li>
+              </ul>
+            </div>
+            <div class="col">
+              <ul ng-repeat="chat in studentStats.chatHistory.helperChats">
+                <li ng-repeat="message in chat.messages">{{displayMessage(message)}}</li>
+              </ul>
+            </div>
+          </div>
+        </ion-content>
+      </ion-modal-view>
+    </script>
+
+  </ion-content>
+</ion-view>

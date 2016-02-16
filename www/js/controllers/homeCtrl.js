@@ -3,14 +3,15 @@ angular.module('app')
 
   var userRef = new Firebase(`https://getitgotit.firebaseio.com/users/${currentAuth.uid}`);
   var user = $firebaseObject(userRef);
-  user.$bindTo($scope, 'user').then(function(){
-    // make sure user didn't use back button to leave
-    $timeout(function(){
-      if ($scope.user.teacher){
-        $state.go('teacher-classroom', {classID: $scope.user.teacher});
-      }
-    }, 300)
-  })
+  user.$bindTo($scope, 'user')
+  // .then(function(){
+  //   // make sure user didn't use back button to leave
+  //   $timeout(function(){
+  //     if ($scope.user.teacher){
+  //       $state.go('teacher-classroom', {classID: $scope.user.teacher});
+  //     }
+  //   }, 300)
+  // })
 
   var classroomsRef = new Firebase("https://getitgotit.firebaseio.com/classrooms");
   var classrooms = $firebaseObject(classroomsRef);

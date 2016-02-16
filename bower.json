@@ -5,6 +5,8 @@
     "ionic": "driftyco/ionic-bower#1.2.4"
   },
   "dependencies": {
-    "angular-base64-upload": "^0.1.17"
+    "angular-base64-upload": "^0.1.17",
+    "d3": "^3.5.15",
+    "moment": "^2.11.2"
   }
 }

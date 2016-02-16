@@ -1,6 +1,6 @@
 /* Empty. Add your own CSS if you like */
 .splashView {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../img/pencils.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../assets/pencils.jpg');
   background-repeat: no-repeat;
   background-size:cover;
   color: white;
@@ -21,7 +21,7 @@
 }
 
 .box {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/home.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/home.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -34,7 +34,7 @@
 
 
 .profileView {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/home.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/home.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -52,4 +52,17 @@
 .profileView .image-list-thumb {
   max-height: 50vh;
   max-width: 50vw;
+}
+
+
+.teacherStatsView {
+  background-color: white;
+}
+.teacherStatsView ion-content {
+  background: linear-gradient(
+    to bottom,
+    rgba(4, 83, 45, 0.7),
+    rgba(4, 83, 45, 0.1),
+    rgba(4, 83, 45, 0.7)
+    );
 }

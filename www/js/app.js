@@ -8,7 +8,7 @@ angular.module('app', ['ionic', 'firebase', 'naif.base64'])
   //
   // delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
-  $urlRouterProvider.otherwise("/");
+  $urlRouterProvider.otherwise("/stats");
 
   $stateProvider
     .state('splash', {
@@ -91,15 +91,43 @@ angular.module('app', ['ionic', 'firebase', 'naif.base64'])
         }]
       }
     })
-    // .state('teacher-stats', {
-    //   url: "/stats",
-    //   templateUrl: "partials/teacher-stats.html",
-    //   controller: "statsCtrl",
-    //   resolve: {
-    //     "currentAuth": ["Auth", function(Auth) {
-    //       return Auth.$requireAuth();
-    //     }]
-    //   }
+    .state('teacher-stats', {
+      url: "/stats",
+      templateUrl: "partials/teacher-stats.html",
+      controller: "statsCtrl",
+      resolve: {
+        "currentAuth": ["Auth", function(Auth) {
+          return Auth.$requireAuth();
+        }]
+      }
+    })
+    // .state('teacher-stats.all', {
+    //   url: "/all",
+    //   views: {
+    //     "stats-all": {
+    //       templateUrl: "partials/teacher-stats-all.html"
+    //     }
+    //   },
+    //   // controller: "statsCtrl",
+    //   // resolve: {
+    //   //   "currentAuth": ["Auth", function(Auth) {
+    //   //     return Auth.$requireAuth();
+    //   //   }]
+    //   // }
+    // })
+    // .state('teacher-stats.class', {
+    //   url: "/class/:id",
+    //   views: {
+    //     "stats-class": {
+    //       templateUrl: "partials/teacher-stats-class.html"
+    //     }
+    //   },
+    //   // controller: "statsCtrl",
+    //   // resolve: {
+    //   //   "currentAuth": ["Auth", function(Auth) {
+    //   //     return Auth.$requireAuth();
+    //   //   }]
+    //   // }
     // })
 
 })
