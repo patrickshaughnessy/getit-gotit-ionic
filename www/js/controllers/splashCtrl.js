@@ -1,10 +1,10 @@
 angular.module('app')
 
-.controller("splashCtrl", function(Auth, currentAuth, $state, $scope, $firebaseObject, $ionicModal) {
+.controller("splashCtrl", function(Auth, currentAuth, $state, $scope, $firebaseObject, $ionicModal, $ionicNavBarDelegate) {
 
-  if (currentAuth){
-    $state.go('home');
-  }
+  // if (currentAuth){
+  //   $state.go('home');
+  // }
 
   var usersRef = new Firebase('https://getitgotit.firebaseio.com/users')
   var users = $firebaseObject(usersRef);

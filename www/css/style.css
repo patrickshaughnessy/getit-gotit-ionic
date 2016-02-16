@@ -9,3 +9,47 @@
 .splashView h1, .splashView h3 {
   color: white;
 }
+
+.slider {
+  height: 100%;
+}
+.slider-slide {
+  padding-top: 80px;
+  color: white;
+  background-color: #fff;
+  text-align: center;
+}
+
+.box {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/home.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.box h1, .box h3  {
+  color: white
+}
+.icon.ion-record {
+  color: white;
+}
+
+
+.profileView {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/home.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.profileView .item-body {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+}
+.profileView .list.card {
+  background: transparent;
+  border-radius: 50vw;
+}
+.profileView h1, .profileView h2, .profileView p {
+  color: white
+}
+.profileView .image-list-thumb {
+  max-height: 50vh;
+  max-width: 50vw;
+}

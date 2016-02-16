@@ -1,0 +1,34 @@
+<ion-view class="profileView">
+  <ion-nav-buttons side='primary'>
+    <button class="button button-balanced" nav-direction="forward" ui-sref="home">
+      Home
+    </button>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="secondary">
+    <button class="button button-assertive" ng-click="logout()">
+      Logout
+    </button>
+  </ion-nav-buttons>
+  <ion-nav-title>
+    Get It, Got It
+  </ion-nav-title>
+
+  <ion-content>
+    <div class="row row-center">
+      <div class="col col-center">
+        <div class="list card" ng-show="user">
+          <div class="item item-body text-center">
+            <img class="image-list-thumb" ng-src="{{user.avatar}}">
+            <h1>{{user.name}}</h1>
+            <h2>{{user.points}} points</h2>
+            <p>Change Your Avatar Picture</p>
+            <form ng-submit="changeAvatar(newAvatar)">
+              <input class="button button-balanced button-small" value="Change Avatar" id="newAvatarUpload" ng-change="changeAvatar(newAvatar)" type="file" ng-model="newAvatar" base-sixty-four-input>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app', ['ionic', 'firebase'])
+angular.module('app', ['ionic', 'firebase', 'naif.base64'])
 
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 
@@ -81,16 +81,16 @@ angular.module('app', ['ionic', 'firebase'])
     //     }]
     //   }
     // })
-    // .state('profile', {
-    //   url: "/profile",
-    //   templateUrl: "partials/profile.html",
-    //   controller: "profileCtrl",
-    //   resolve: {
-    //     "currentAuth": ["Auth", function(Auth) {
-    //       return Auth.$requireAuth();
-    //     }]
-    //   }
-    // })
+    .state('profile', {
+      url: "/profile",
+      templateUrl: "partials/profile.html",
+      controller: "profileCtrl",
+      resolve: {
+        "currentAuth": ["Auth", function(Auth) {
+          return Auth.$requireAuth();
+        }]
+      }
+    })
     // .state('teacher-stats', {
     //   url: "/stats",
     //   templateUrl: "partials/teacher-stats.html",
