@@ -1,7 +1,7 @@
 angular.module('app')
 
 .controller("splashCtrl", function(Auth, currentAuth, $state, $scope, $firebaseObject, $ionicModal, $ionicNavBarDelegate) {
-  console.log(currentAuth);
+  
   if (currentAuth){
     $state.go('home');
   }

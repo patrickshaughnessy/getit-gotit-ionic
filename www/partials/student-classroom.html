@@ -11,37 +11,30 @@
     </button>
   </ion-nav-buttons>
   <ion-nav-title>
-    Class #{{classID}}
+      Class #{{classID}}
   </ion-nav-title>
 
 
-  <ion-content class="has-header">
-    <div class="item needHelpWrapper">
-      <div class="row row-center">
-        <div class="col col-center">
-          <button ng-click="needHelp()" class="needHelpButton button button-large button-full button-assertive" ng-disabled="loading">I Don't Get It</button>
+  <div class="bar bar-subheader button-bar" ng-show="displayHelp">
+    <button ng-click="helpSomeone()" class="helpButton button button-balanced">I Can Help</button>
+  </div>
+  <ion-content class="has-header has-subheader">
+    <div class="helpButtonWrapper">
+      <button ng-click="needHelp()" ng-style="{width: needHelpButton.width, height: needHelpButton.width, margin: needHelpButton.margin}" class="needHelpButton button button-large button-assertive" ng-disabled="loading">I Don't Get It</button>
+    </div>
+    <div class="card">
+      <div class="item">
+        <div class="row text-center">
+          <div class="col col-center">
+            <h4>My Total Points:</h4>
+            <p>{{user.points}}</p>
+          </div>
+          <div class="col col-center">
+            <h4>Points This Class:</h4>
+            <p>{{classroom.students[user.class.key].points}}</p>
+          </div>
         </div>
       </div>
     </div>
   </ion-content>
 </ion-view>
-<!--
-<div class="studentBackground">
-  <div class="studentWrapper" ng-init="loading = false">
-    <button class="btn btn-primary backButtonStudent" ng-click="leaveClass()" ng-disabled="loading">Leave Class</button>
-    <div class="myPoints">
-      <span>My Total Points: {{user.points}} <br> Points This Class: {{classroom.students[user.class.key].points}} </span>
-    </div>
-    <button class="btn btn-warning logoutButtonStudent" ng-click="logout()" ng-disabled="loading">Logout</button>
-    <div class="studentInner">
-      <div class="studentDisplay">
-      </div>
-      <div class="needHelpButtonWrapper">
-        <button ng-click="needHelp()" class="needHelpButton btn btn-warning" ng-disabled="loading">I Don't Get It</button>
-      </div>
-      <div class="helpButtonWrapper">
-        <button ng-click="helpSomeone()" class="helpButton btn btn-primary" ng-class="{displayHelp: displayHelp}" ng-disabled="loading">I Can Help</button>
-      </div>
-    </div>
-  </div>
-</div> -->

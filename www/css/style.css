@@ -76,13 +76,29 @@
   background-color: white;
 }
 
+
+.studentClassroom {
+  background: linear-gradient(
+    to bottom,
+    rgba(4, 83, 45, 0.7),
+    rgba(4, 83, 45, 0.1),
+    rgba(4, 83, 45, 0.7)
+    );
+}
+
+
+.helpButtonWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .needHelpButton {
-  height: 100%;
   border-radius: 50%;
 }
-.needHelpWrapper {
+/*.needHelpWrapper {
   height: 50vh;
 }
 .needHelpWrapper .row, .needHelpWrapper .col{
   height: 100%;
-}
+}*/

@@ -1,8 +1,6 @@
 angular.module('app')
 .controller("homeCtrl", function(currentAuth, Auth, $state, $rootScope, $scope, $firebaseObject, $firebaseArray, $timeout) {
 
-  console.log('current Auth home', currentAuth);
-
   var userRef = new Firebase(`https://getitgotit.firebaseio.com/users/${currentAuth.uid}`);
   var user = $firebaseObject(userRef);
   user.$bindTo($scope, 'user');

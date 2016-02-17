@@ -126,4 +126,17 @@ angular.module('app')
     },200)
   }
 
+  $scope.needHelpButton = {}
+
+  function updateSize(){
+    var width = $window.innerWidth;
+    var height = $window.innerHeight;
+
+    $scope.needHelpButton.width = width > height ? Math.round(height*0.5) + 'px' : Math.round(width*0.7)+ 'px';
+    $scope.needHelpButton.margin = width > height ? Math.round(height*0.05) + 'px' : Math.round(width*0.05)+ 'px';
+  }
+  updateSize();
+  // angular.element($window).bind('resize', updateSize);
+  angular.element($window).bind('orientationchange', updateSize);
+
 });
