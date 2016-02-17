@@ -1,57 +1,25 @@
 angular.module('app')
 
 .controller("splashCtrl", function(Auth, currentAuth, $state, $scope, $firebaseObject, $ionicModal, $ionicNavBarDelegate) {
-
-  Auth.$onAuth(function(authData) {
-  if (authData === null) {
-    console.log('Not logged in yet');
-  } else {
-    console.log('Logged in as', authData.uid);
-  }
-  // This will display the user's name in our view
-  $scope.authData = authData;
-});
-
+  console.log(currentAuth);
   if (currentAuth){
     $state.go('home');
   }
 
+  $scope.loggingIn;
+
   var usersRef = new Firebase('https://getitgotit.firebaseio.com/users')
   var users = $firebaseObject(usersRef);
+
 
   $scope.loginWithFacebook = function(){
     $scope.loggingIn = true;
     Auth.$authWithOAuthRedirect("facebook").then(function(authData) {
-      console.log('authData', authData);
-      if (!users[authData.uid]){
-        users[authData.uid] = {
-          name: authData.facebook.displayName,
-          avatar: authData.facebook.profileImageURL,
-          points: 0,
-          helpee: false,
-          helper: false,
-          helping: null,
-          teacher: false
-        }
-        users.$save();
-      }
       return $state.go('home');
     }).catch(function(error) {
       if (error.code === "TRANSPORT_UNAVAILABLE") {
         Auth.$authWithOAuthPopup("facebook").then(function(authData) {
           // User successfully logged in.
-          if (!users[authData.uid]){
-            users[authData.uid] = {
-              name: authData.facebook.displayName,
-              avatar: authData.facebook.profileImageURL,
-              points: 0,
-              helpee: false,
-              helper: false,
-              helping: null,
-              teacher: false
-            }
-            users.$save();
-          }
           return $state.go('home');
         }).catch(function(error){
           console.log(error);
@@ -87,18 +55,6 @@ angular.module('app')
     Auth.$createUser(user).then(function(userData) {
       return Auth.$authWithPassword(user);
     }).then(function(authData) {
-      if (!users[authData.uid]){
-        users[authData.uid] = {
-          name: authData.password.email.replace(/@.*/, ''),
-          avatar: 'assets/defaultPic.png',
-          points: 0,
-          helpee: false,
-          helper: false,
-          helping: null,
-          teacher: false
-        }
-        users.$save();
-      }
       $scope.closeModal();
       return $state.go('home');
     }).catch(function(error) {
