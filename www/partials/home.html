@@ -1,6 +1,7 @@
 <ion-view class="homeView">
   <ion-nav-buttons side='primary'>
-    <button class="button button-balanced" nav-direction="back" ui-sref="profile">
+    <button class="button icon icon-left" nav-direction="back" ui-sref="profile">
+      <i class="icon ion-chevron-left"></i>
       My Profile
     </button>
   </ion-nav-buttons>
@@ -10,31 +11,46 @@
     </button>
   </ion-nav-buttons>
   <ion-nav-title>
-    Get It, Got It
+    {{ user.name ? "Hey there, " + user.name + "!" : "Hey you!" }}
   </ion-nav-title>
 
   <ion-slide-box>
-    <ion-slide class="box">
-      <div class="row row-center">
-        <div class="col col-center text-center">
-          <h1>I'm A Teacher</h1>
-          <br>
-          <h3>Start a new class instance or view your stats page.</h3>
+    <ion-slide class="box teacherSlide">
+
+      <div class="list card">
+        <div class="card">
+          <h1>Are you teaching today?</h1>
+          <h2>Start a new class instance or view your stats page.</h2>
+          <div class="item item-text-wrap">
+            <div class="row">
+              <div class="col-50 col-offset-25">
+                <button class="button button-full button-large button-positive item-icon-left" nav-direction="back" ng-click="startNewClass()">
+                  <i class="icon ion-chevron-left"></i>
+                  Start A Class
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+
+            <h4>-- or --</h4>
+          </div>
+          <div class="item">
+            <div class="row">
+              <div class="col-50 col-offset-25">
+                <button class="button button-full button-large button-positive item-icon-right" nav-direction="forward" ui-sref="teacher-stats">
+                  View Stats
+                  <i class="icon ion-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
+
       </div>
-      <div class="row row-center">
-        <div class="col">
-          <button class="button button-full button-balanced" ng-click="startNewClass()">Start A Class</button>
-        </div>
-        <div class="col-10 col-center">
-          <h3>or</h3>
-        </div>
-        <div class="col">
-          <button class="button button-full button-balanced" ui-sref="teacher-stats">View Stats</button>
-        </div>
-      </div>
+
     </ion-slide>
-    <ion-slide class="box">
+    <ion-slide class="box studentSlide">
       <div class="row row-center">
         <div class="col col-center text-center">
           <h1>I'm A Student</h1>

@@ -20,14 +20,24 @@
   text-align: center;
 }
 
-.box {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/home.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
+.box.teacherSlide {
+  background: linear-gradient(
+    to bottom,
+    rgba(4, 83, 45, 0.7),
+    rgba(4, 83, 45, 0.1),
+    rgba(4, 83, 45, 0.7)
+    );
 }
-.box h1, .box h3  {
-  color: white
+.box.studentSlide {
+  background: linear-gradient(
+    to bottom,
+    rgba(27, 116, 156, 0.7),
+    rgba(126, 12, 16, 0.1),
+    rgba(27, 116, 156, 0.7)
+    );
 }
+
+
 .icon.ion-record {
   color: white;
 }
