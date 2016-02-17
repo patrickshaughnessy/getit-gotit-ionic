@@ -13,6 +13,19 @@ angular.module('app')
   //   }, 300)
   // })
 
+  $scope.options = {
+    loop: false,
+    paginationClickable: true,
+    paginationType: 'bullets',
+    // effect: fade,
+    // speed: 500,
+  }
+  $scope.data = {};
+  $scope.$watch('data.slider', function(nv, ov) {
+    $scope.slider = $scope.data.slider;
+  })
+
+
   var classroomsRef = new Firebase("https://getitgotit.firebaseio.com/classrooms");
   var classrooms = $firebaseObject(classroomsRef);
   classrooms.$bindTo($scope, 'classrooms');

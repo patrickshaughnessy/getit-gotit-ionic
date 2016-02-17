@@ -27,6 +27,8 @@
     rgba(4, 83, 45, 0.1),
     rgba(4, 83, 45, 0.7)
     );
+  overflow:auto;
+  -webkit-overflow-scrolling: touch;
 }
 .box.studentSlide {
   background: linear-gradient(
@@ -68,4 +70,8 @@
     rgba(4, 83, 45, 0.1),
     rgba(4, 83, 45, 0.7)
     );
+}
+
+[nav-view-transition=ios][nav-view-direction=forward], [nav-view-transition=ios][nav-view-direction=back] {
+  background-color: white;
 }

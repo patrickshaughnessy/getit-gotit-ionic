@@ -14,65 +14,75 @@
     {{ user.name ? "Hey there, " + user.name + "!" : "Hey you!" }}
   </ion-nav-title>
 
-  <ion-slide-box>
-    <ion-slide class="box teacherSlide">
+  <ion-slides class="has-header" options="options" slider="data.slider">
+
+    <ion-slide-page class="has-header box teacherSlide">
+        <div class="list card">
+          <div class="card text-center">
+            <h1>Are you teaching today?</h1>
+            <p>If not, swipe right.</p>
+            <p>Otherwise, start a new class instance or view your stats page.</p>
+            <div class="item item-text-wrap">
+              <div class="row">
+                <div class="col-80 col-offset-10">
+                  <button class="button button-full button-large button-positive item-icon-left item-icon-right" nav-direction="back" ng-click="startNewClass()">
+                    <i class="icon ion-star"></i>
+                    Start A Class
+                    <i class="icon ion-star"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="row">
+                <div class="col-80 col-offset-10">
+                  <button class="button button-full button-large button-positive item-icon-left item-icon-right" nav-direction="forward" ui-sref="teacher-stats">
+                    <i class="icon ion-arrow-graph-up-left"></i>
+                    View Stats
+                    <i class="icon ion-arrow-graph-up-right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+    </ion-slide-page>
+
+    <ion-slide-page class="has-header box studentSlide">
 
       <div class="list card">
-        <div class="card">
-          <h1>Are you teaching today?</h1>
-          <h2>Start a new class instance or view your stats page.</h2>
+        <div class="card text-center">
+          <h1>Are you a student today?</h1>
+          <p>If not, swipe left.</p>
+          <p>Otherwise, enter the class ID number provided by your teacher.</p>
           <div class="item item-text-wrap">
             <div class="row">
-              <div class="col-50 col-offset-25">
-                <button class="button button-full button-large button-positive item-icon-left" nav-direction="back" ng-click="startNewClass()">
-                  <i class="icon ion-chevron-left"></i>
-                  Start A Class
-                </button>
+              <div class="col-80 col-offset-10">
+                <div class="list list-inset">
+                  <label class="item item-input">
+                    <input ng-model="classID" type="text" placeholder="Class ID">
+                  </label>
+                </div>
               </div>
             </div>
           </div>
-          <div class="item">
 
-            <h4>-- or --</h4>
-          </div>
           <div class="item">
             <div class="row">
-              <div class="col-50 col-offset-25">
-                <button class="button button-full button-large button-positive item-icon-right" nav-direction="forward" ui-sref="teacher-stats">
-                  View Stats
-                  <i class="icon ion-chevron-right"></i>
-                </button>
+              <div class="col-80 col-offset-10">
+                <button class="button button-full button-large button-positive" ng-click="goToClass()">Join!</button>
               </div>
             </div>
           </div>
-        </div>
 
+        </div>
       </div>
 
-    </ion-slide>
-    <ion-slide class="box studentSlide">
-      <div class="row row-center">
-        <div class="col col-center text-center">
-          <h1>I'm A Student</h1>
-          <br>
-          <h3>Enter the class ID number provided by your teacher.</h3>
-        </div>
-      </div>
-      <div class="row row-center">
-        <div class="col-50 col-offset-25">
-          <div class="list">
-            <label class="item item-input">
-              <input ng-model="classID" type="text" placeholder="Class ID">
-            </label>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-50 col-offset-25">
-          <button class="button button-full button-balanced" ng-click="goToClass()">Join!</button>
-        </div>
-      </div>
-    </ion-slide>
-  </ion-slide-box>
+    </ion-slide-page>
+
+  </ion-slides>
 
 </ion-view>
