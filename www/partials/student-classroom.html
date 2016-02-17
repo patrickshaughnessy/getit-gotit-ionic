@@ -1,0 +1,41 @@
+<ion-view class="studentClassroom">
+  <ion-nav-buttons side='primary'>
+    <button class="button icon icon-left" nav-direction="back" ui-sref="home">
+      <i class="icon ion-chevron-left"></i>
+      Home
+    </button>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="secondary">
+    <button class="button button-assertive" ng-click="leaveClass()">
+      Leave Class
+    </button>
+  </ion-nav-buttons>
+  <ion-nav-title>
+    Class #{{classID}}
+  </ion-nav-title>
+
+
+  <ion-content class="has-header">
+    student
+  </ion-content>
+</ion-view>
+<!--
+<div class="studentBackground">
+  <div class="studentWrapper" ng-init="loading = false">
+    <button class="btn btn-primary backButtonStudent" ng-click="leaveClass()" ng-disabled="loading">Leave Class</button>
+    <div class="myPoints">
+      <span>My Total Points: {{user.points}} <br> Points This Class: {{classroom.students[user.class.key].points}} </span>
+    </div>
+    <button class="btn btn-warning logoutButtonStudent" ng-click="logout()" ng-disabled="loading">Logout</button>
+    <div class="studentInner">
+      <div class="studentDisplay">
+      </div>
+      <div class="needHelpButtonWrapper">
+        <button ng-click="needHelp()" class="needHelpButton btn btn-warning" ng-disabled="loading">I Don't Get It</button>
+      </div>
+      <div class="helpButtonWrapper">
+        <button ng-click="helpSomeone()" class="helpButton btn btn-primary" ng-class="{displayHelp: displayHelp}" ng-disabled="loading">I Can Help</button>
+      </div>
+    </div>
+  </div>
+</div> -->

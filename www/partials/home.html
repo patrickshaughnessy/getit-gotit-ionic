@@ -66,17 +66,24 @@
 
       <div class="list card">
         <div class="card text-center">
-          <h1>Are you a student today?</h1>
-          <p>If not, swipe left.</p>
-          <p>Otherwise, enter the class ID number provided by your teacher.</p>
+          <div ng-hide="user.class">
+            <h1>Are you a student today?</h1>
+            <p>If not, swipe left.</p>
+            <p>Otherwise, enter the class ID number provided by your teacher.</p>
+          </div>
+          <div ng-show="user.class">
+            <h1>What's Up?</h1>
+            <p>Head back to class!</p>
+          </div>
           <div class="item item-text-wrap">
             <div class="row">
               <div class="col-80 col-offset-10">
-                <div class="list list-inset">
+                <div class="list list-inset" ng-hide="user.class">
                   <label class="item item-input">
                     <input ng-model="studentClassID" type="text" placeholder="Class ID">
                   </label>
                 </div>
+                <h2 ng-show="user.class">Your Class ID: {{user.class.id}}</h2>
               </div>
             </div>
           </div>
@@ -84,7 +91,8 @@
           <div class="item">
             <div class="row">
               <div class="col-80 col-offset-10">
-                <button class="button button-full button-large button-positive" ng-click="goToClass(studentClassID)">Join!</button>
+                <button ng-hide="user.class" class="button button-full button-large button-positive" ng-click="goToClass(studentClassID)">Join!</button>
+                <button ng-show="user.class" class="button button-full button-large button-positive" ng-click="rejoinClass()">Rejoin!</button>
               </div>
             </div>
           </div>

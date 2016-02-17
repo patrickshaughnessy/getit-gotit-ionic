@@ -1,4 +1,4 @@
-<ion-view class=teacherStatsView>
+<ion-view class="teacherStatsView">
   <ion-nav-buttons side='primary'>
     <button class="button icon icon-left" nav-direction="back" ui-sref="home">
       <i class="icon ion-chevron-left"></i>
@@ -40,28 +40,3 @@
     <student-circles students="{{students}}" percentage="{{percentage}}" ng-show="students.length"></student-circles>
   </ion-content>
 </ion-view>
-
-
-<!-- <div class="teacherBackground" ng-init="loading = false">
-  <div class="teacherHeader">
-    <div class="row">
-      <div class="col-xs-12 endClassButton text-center">
-        <h1 ng-click="endClass()" ng-disabled="loading">{{loading ? 'One Moment' : 'End Class'}}</h1>
-      </div>
-    </div>
-  </div>
-  <div class="studentCirclesArea">
-    <div class="col-xs-12">
-      <h1 class="text-center">
-        Classroom ID: &nbsp;{{classID}}
-      </h1>
-    </div>
-    <div class="col-xs-4 text-center">
-      <h3 ng-if="points == 0 || !points">...</h3>
-      <h3 ng-if="points > 0">Class Points: {{points}}</h3>
-    </div>
-    <div class="col-xs-4 text-center">
-      <h1>{{percentage || "..."}}</h1>
-    </div>
-  </div>
-</div> -->

@@ -6,7 +6,7 @@ angular.module('app')
     $state.go('home');
   }
 
-  $scope.loggingIn;
+  $scope.loggingIn = false;
 
   var usersRef = new Firebase('https://getitgotit.firebaseio.com/users')
   var users = $firebaseObject(usersRef);

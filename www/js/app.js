@@ -48,39 +48,39 @@ angular.module('app', ['ionic', 'firebase', 'naif.base64'])
         }]
       }
     })
-    // .state('student-classroom', {
-    //   url: "/student-classroom/:classID",
-    //   templateUrl: "partials/student-classroom.html",
-    //   controller: "studentCtrl",
-    //   params: {
-    //     studentKey: null
-    //   },
-    //   resolve: {
-    //     "currentAuth": ["Auth", function(Auth) {
-    //       return Auth.$requireAuth();
-    //     }]
-    //   }
-    // })
-    // .state('chatroom-helpee', {
-    //   url: "/student-classroom/:classID/chatroom-helpee/:chatID",
-    //   templateUrl: "partials/chatroom-helpee.html",
-    //   controller: "chatroomHelpeeCtrl",
-    //   resolve: {
-    //     "currentAuth": ["Auth", function(Auth) {
-    //       return Auth.$requireAuth();
-    //     }]
-    //   }
-    // })
-    // .state('chatroom-helper', {
-    //   url: "/student-classroom/:classID/chatroom-helper/:chatID",
-    //   templateUrl: "partials/chatroom-helper.html",
-    //   controller: "chatroomHelperCtrl",
-    //   resolve: {
-    //     "currentAuth": ["Auth", function(Auth) {
-    //       return Auth.$requireAuth();
-    //     }]
-    //   }
-    // })
+    .state('student-classroom', {
+      url: "/student-classroom/:classID",
+      templateUrl: "partials/student-classroom.html",
+      controller: "studentCtrl",
+      params: {
+        studentKey: null
+      },
+      resolve: {
+        "currentAuth": ["Auth", function(Auth) {
+          return Auth.$requireAuth();
+        }]
+      }
+    })
+    .state('chatroom-helpee', {
+      url: "/student-classroom/:classID/chatroom-helpee/:chatID",
+      templateUrl: "partials/chatroom-helpee.html",
+      controller: "chatroomHelpeeCtrl",
+      resolve: {
+        "currentAuth": ["Auth", function(Auth) {
+          return Auth.$requireAuth();
+        }]
+      }
+    })
+    .state('chatroom-helper', {
+      url: "/student-classroom/:classID/chatroom-helper/:chatID",
+      templateUrl: "partials/chatroom-helper.html",
+      controller: "chatroomHelperCtrl",
+      resolve: {
+        "currentAuth": ["Auth", function(Auth) {
+          return Auth.$requireAuth();
+        }]
+      }
+    })
     .state('profile', {
       url: "/profile",
       templateUrl: "partials/profile.html",
