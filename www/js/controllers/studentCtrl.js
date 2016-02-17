@@ -5,19 +5,7 @@ angular.module('app')
 
   var userRef = new Firebase(`https://getitgotit.firebaseio.com/users/${currentAuth.uid}`);
   var user = $firebaseObject(userRef);
-  user.$bindTo($scope, 'user')
-  // .then(function(){
-  //   // make sure user didn't use back button to leave
-  //   $timeout(function(){
-  //     if (!$scope.user.class || $scope.user.class.id !== $state.params.classID){
-  //       $state.go('home');
-  //     } else if ($scope.user.helpee){
-  //       $state.go('chatroom-helpee', {classID: $state.params.classID, chatID: $scope.user.helpee});
-  //     } else if ($scope.user.helper){
-  //       $state.go('chatroom-helper', {classID: $state.params.classID, chatID: $scope.user.helper.chatID});
-  //     }
-  //   }, 300)
-  // })
+  user.$bindTo($scope, 'user');
 
   var classroomRef = new Firebase(`https://getitgotit.firebaseio.com/classrooms/${$state.params.classID}`);
   var classroom = $firebaseObject(classroomRef);
@@ -56,10 +44,8 @@ angular.module('app')
 
 
   $scope.needHelp = function(){
-    $scope.loading = true;
     // create new chatroom for user
     if (!$scope.user || !$scope.chatrooms) {
-      $scope.loading = false;
       return;
     }
 
@@ -77,7 +63,6 @@ angular.module('app')
   }
 
   $scope.helpSomeone = function(){
-    $scope.loading = true;
     // join chatroom of user that needs help
     chatroomsRef.once('value', function(chatrooms){
 
@@ -110,14 +95,12 @@ angular.module('app')
   }
 
   $scope.leaveClass = function(){
-    $scope.loading = true;
     $scope.students.$remove($scope.students.$getRecord($scope.user.class.key));
     $scope.user.class = null;
     $state.go('home');
   }
 
   $scope.logout = function(){
-    $scope.loading = true;
     $scope.students.$remove($scope.students.$getRecord($scope.user.class.key));
     $scope.user.class = null;
     $timeout(function(){

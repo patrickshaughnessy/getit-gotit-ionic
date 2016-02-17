@@ -65,7 +65,6 @@ angular.module('app')
   });
 
   $scope.backToClass = function(){
-    $scope.loading = true;
 
     // update students list in class for viz
     var index = $scope.students.$indexFor($scope.user.class.key);

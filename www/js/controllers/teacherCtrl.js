@@ -87,8 +87,6 @@ angular.module('app')
   }
 
   $scope.endClass = function(){
-    $scope.loading = true;
-
     $interval.cancel($scope.isRecording);
 
     classroom.$remove();

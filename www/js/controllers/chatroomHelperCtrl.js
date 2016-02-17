@@ -60,7 +60,6 @@ angular.module('app')
     classroomsRef.once('value', function(classrooms){
       // case 1) classroom still exists && the removed chatroom is current chatroom
       if (classrooms.hasChild($state.params.classID) && (chatroom.key() === $state.params.chatID)){
-        $scope.loading = true;
         // update students list in class for viz
         var index = $scope.students.$indexFor($scope.user.class.key);
         $scope.user.helper = false;
@@ -76,7 +75,6 @@ angular.module('app')
         $state.go('student-classroom', {classID: $state.params.classID})
 
       } else if (!classrooms.hasChild($state.params.classID)) {   // case 2) classroom has been removed
-        $scope.loading = true;
         $scope.user.helpee = false;
         $scope.user.helper = false;
         $scope.user.class = null;
@@ -89,7 +87,6 @@ angular.module('app')
   });
 
   $scope.backToClass = function(){
-    $scope.loading = true;
 
     $scope.messages.$add({
       text: `** User ${$scope.user.$id.slice(-10)} has left the chat **`,

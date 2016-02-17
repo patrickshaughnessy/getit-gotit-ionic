@@ -1,19 +1,16 @@
 angular.module('app')
 
 .controller("splashCtrl", function(Auth, currentAuth, $state, $scope, $firebaseObject, $ionicModal, $ionicNavBarDelegate) {
-  
+
   if (currentAuth){
     $state.go('home');
   }
-
-  $scope.loggingIn = false;
 
   var usersRef = new Firebase('https://getitgotit.firebaseio.com/users')
   var users = $firebaseObject(usersRef);
 
 
   $scope.loginWithFacebook = function(){
-    $scope.loggingIn = true;
     Auth.$authWithOAuthRedirect("facebook").then(function(authData) {
       return $state.go('home');
     }).catch(function(error) {
@@ -23,12 +20,10 @@ angular.module('app')
           return $state.go('home');
         }).catch(function(error){
           console.log(error);
-          $scope.loggingIn = false;
         });
       } else {
         // Another error occurred
         console.log(error);
-        $scope.loggingIn = false;
       }
     });
 
@@ -46,7 +41,6 @@ angular.module('app')
         return;
       }
       console.log(error);
-      $scope.loggingIn = false;
     });
   }
 
@@ -59,7 +53,6 @@ angular.module('app')
       return $state.go('home');
     }).catch(function(error) {
       console.log(error);
-      $scope.loggingIn = false;
     });
   }
 

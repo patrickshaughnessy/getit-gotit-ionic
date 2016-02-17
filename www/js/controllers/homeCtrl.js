@@ -34,9 +34,7 @@ angular.module('app')
   }
 
   $scope.startNewClass = function(){
-    $scope.loading = true;
     if (!$scope.user || !$scope.classrooms) {
-      $scope.loading = false;
       return;
     }
 
@@ -51,16 +49,14 @@ angular.module('app')
       $scope.user.teacher = id;
       $state.go('teacher-classroom', {classID: id});
     } else {
-      $scope.loading = false;
+      // cancel loading
     }
 
   }
 
   $scope.goToClass = function(id){
-    $scope.loading = true;
     // wait for firebase connection, return if not valid input
     if (!$scope.user || !$scope.classrooms || !id) {
-      $scope.loading = false;
       return;
     }
 
@@ -68,7 +64,6 @@ angular.module('app')
 
     // if no class with that ID exists, show error message
     if (!$scope.classrooms[classID]){
-      $scope.loading = false;
       return
       // return swal('Oops', 'No class exists with that ID. Did you type it correctly?', 'error');
     };
@@ -99,7 +94,6 @@ angular.module('app')
   }
 
   $scope.logout = function(){
-    $scope.loading = true;
     Auth.$unauth();
     $state.go('splash');
   }
