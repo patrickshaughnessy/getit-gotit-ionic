@@ -15,7 +15,7 @@
     on-refresh-opening="onRefreshOpening(amount)"
     refresh-complete="refreshComplete"
     animate-nav="true"
-    class="chatMessagesContainer has-header"
+    class="chatMessagesContainer has-header has-footer"
     >
     <div ng-repeat="message in messages | orderBy:'-time'" type="item-text-wrap">
       <div class="item item-body message">
