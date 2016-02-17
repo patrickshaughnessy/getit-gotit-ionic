@@ -75,3 +75,14 @@
 [nav-view-transition=ios][nav-view-direction=forward], [nav-view-transition=ios][nav-view-direction=back] {
   background-color: white;
 }
+
+.needHelpButton {
+  height: 100%;
+  border-radius: 50%;
+}
+.needHelpWrapper {
+  height: 50vh;
+}
+.needHelpWrapper .row, .needHelpWrapper .col{
+  height: 100%;
+}

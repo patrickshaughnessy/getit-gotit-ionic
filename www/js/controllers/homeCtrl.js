@@ -96,11 +96,6 @@ angular.module('app')
     })
   }
 
-  $scope.rejoinClass = function(){
-    $scope.loading = true;
-    $state.go('student-classroom', {classID: $scope.user.class.id});
-  }
-
   $scope.teacherRejoinClass = function(classID){
     return `/teacher-classroom/${classID}`;
   }

@@ -1,8 +1,7 @@
 angular.module('app')
-.controller("studentCtrl", function(Auth, currentAuth, $state, $rootScope, $scope, $firebaseObject, $firebaseArray, $timeout) {
+.controller("studentCtrl", function(Auth, currentAuth, $state, $rootScope, $scope, $firebaseObject, $firebaseArray, $timeout, $window) {
 
   $scope.classID = $state.params.classID;
-  console.log('classID', $scope)
 
   var userRef = new Firebase(`https://getitgotit.firebaseio.com/users/${currentAuth.uid}`);
   var user = $firebaseObject(userRef);

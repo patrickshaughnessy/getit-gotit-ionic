@@ -91,8 +91,8 @@
           <div class="item">
             <div class="row">
               <div class="col-80 col-offset-10">
-                <button ng-hide="user.class" class="button button-full button-large button-positive" ng-click="goToClass(studentClassID)">Join!</button>
-                <button ng-show="user.class" class="button button-full button-large button-positive" ng-click="rejoinClass()">Rejoin!</button>
+                <button ng-hide="user.class" class="button button-full button-large button-positive" nav-direction="forward" ng-click="goToClass(studentClassID)">Join!</button>
+                <button ng-show="user.class" class="button button-full button-large button-positive" nav-direction="forward" ui-sref="student-classroom({classID: user.class.id})">Rejoin!</button>
               </div>
             </div>
           </div>
