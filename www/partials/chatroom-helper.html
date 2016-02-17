@@ -1,16 +1,41 @@
-<ion-view class="chatroomHelper">
+<ion-view class="chatViewHelper">
   <ion-nav-buttons side='primary'>
-    <button class="button icon icon-left" nav-direction="back" ui-sref="home">
+    <button class="button icon icon-left" nav-direction="back" ng-click="backToClass()">
       <i class="icon ion-chevron-left"></i>
-      Home
+      Sorry, I Can't Help
     </button>
   </ion-nav-buttons>
   <ion-nav-title>
     Helper
   </ion-nav-title>
 
-
-  <ion-content class="has-header">
-    student
+  <ion-content
+    scroll="true"
+    on-refresh="onRefresh()"
+    on-refresh-opening="onRefreshOpening(amount)"
+    refresh-complete="refreshComplete"
+    animate-nav="true"
+    class="chatMessagesContainer has-header"
+    >
+    <div ng-repeat="message in messages | orderBy:'-time'" type="item-text-wrap">
+      <div class="item item-body message">
+        <div class="row text-right" ng-class="{'myMessage': message.sender === user.$id}">
+          <!-- <div class="col col-20 author">{{message.sender}}</div> -->
+          <div class="col content">{{displayMessage(message)}}</div>
+          <!-- <div class="col col-10 time">{{message.time | date: 'short' }}</div> -->
+        </div>
+      </div>
+    </div>
   </ion-content>
+
+  <div class="bar bar-footer bar-stable" id="bar-footer-message-box">
+    <div class="list list-inset">
+      <form ui-keypress="{13:'submitAddMessage($event)'}" data-ng-submit="addMessage()" >
+        <label class="item item-input">
+          <input type="text" placeholder="Enter your message ..." data-ng-model="newMessage.text">
+          <button class="button button-positive">Send</button>
+        </label>
+      </form>
+    </div>
+  </div>
 </ion-view>

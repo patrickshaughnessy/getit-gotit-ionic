@@ -1,6 +1,7 @@
 angular.module('app')
 .controller("chatroomHelpeeCtrl", function(Auth, currentAuth, $state, $scope, $firebaseObject, $firebaseArray, $location, $anchorScroll) {
 
+  $scope.classID = $state.params.classID;
   // document.querySelectorAll("link[rel*='icon'")[0].setAttribute('href', "assets/redcircle.ico");
 
   var usersRef = new Firebase(`https://getitgotit.firebaseio.com/users`);
@@ -29,24 +30,24 @@ angular.module('app')
   }
 
   $scope.displayMessage = function(message){
-
     if (message.sender == 'admin'){
       return `${message.text}`;
     } else {
       return `${message.sender === user.$id ? 'Me' : 'User ' + message.sender.slice(-10)}: ${message.text}`
     }
-
   }
 
+  $scope.newMessage = {};
+  console.log($scope.newMessage);
   $scope.addMessage = function() {
-    $scope.loading = true;
-    if (!$scope.newMessageText) return;
+    console.log($scope.newMessage);
+    if (!$scope.newMessage.text || !$scope.user) return;
     $scope.messages.$add({
-      text: $scope.newMessageText,
-      sender: $scope.user.$id
+      text: $scope.newMessage.text,
+      sender: $scope.user.$id,
+      time: Date.now()
     });
-    $scope.newMessageText = '';
-    $scope.loading = false;
+    $scope.newMessage.text = '';
   };
 
   // remove student if teacher ends the class;

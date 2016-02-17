@@ -19,7 +19,8 @@ angular.module('app')
   $scope.messages.$loaded().then(function(){
     $scope.messages.$add({
       text: `** User ${$scope.user.$id.slice(-10)} has joined the chat **`,
-      sender: 'admin'
+      sender: 'admin',
+      time: Date.now()
     })
   })
 
@@ -38,16 +39,17 @@ angular.module('app')
     }
   }
 
+  $scope.newMessage = {};
   $scope.addMessage = function() {
-    $scope.loading = true;
-    if (!$scope.newMessageText) return;
+    if (!$scope.newMessage.text || !$scope.user) return;
     $scope.messages.$add({
-      text: $scope.newMessageText,
-      sender: $scope.user.$id
+      text: $scope.newMessage.text,
+      sender: $scope.user.$id,
+      time: Date.now()
     });
-    $scope.newMessageText = '';
-    $scope.loading = false;
+    $scope.newMessage.text = '';
   };
+
 
   var classroomsRef = new Firebase(`https://getitgotit.firebaseio.com/classrooms`);
 
@@ -91,7 +93,8 @@ angular.module('app')
 
     $scope.messages.$add({
       text: `** User ${$scope.user.$id.slice(-10)} has left the chat **`,
-      sender: 'admin'
+      sender: 'admin',
+      time: Date.now()
     }).then(function(ref){
       $scope.chatroom.helper = null;
       $scope.user.helper = false;

@@ -96,9 +96,69 @@
 .needHelpButton {
   border-radius: 50%;
 }
-/*.needHelpWrapper {
-  height: 50vh;
+
+
+#bar-footer-message-box {
+  padding: 5px;
+  height: auto;
 }
-.needHelpWrapper .row, .needHelpWrapper .col{
-  height: 100%;
-}*/
+
+#bar-footer-message-box .list {
+  width: 100%;
+  margin: 0;
+}
+
+.chatMessagesContainer {
+  transform: rotate(180deg);
+}
+
+.message {
+  padding: 0;
+  font-size: 12px;
+}
+.message .row {
+  padding: 0;
+}
+.message .col {
+  padding: 10px 5px;
+}
+.message .author {
+  background-color: #f8f8f8;
+  border-right: 1px solid #ddd;
+  text-align: right;
+  font-weight: bold;
+  color: #555;
+}
+
+.message .content {
+  word-wrap: break-word;
+  transform: rotate(180deg);
+}
+
+.message .time {
+  text-align: right;
+  color: #777;
+}
+
+.myMessage {
+  background-color: rgb(255, 239, 196);
+  text-align: left;
+}
+
+.chatViewHelpee{
+  background: linear-gradient(
+    to bottom,
+    rgba(172, 20, 26, 0.7),
+    rgba(27, 116, 156, 0.1),
+    rgba(172, 20, 26, 0.7)
+    );
+}
+
+.chatViewHelper{
+  background: linear-gradient(
+    to bottom,
+    rgba(27, 116, 156, 0.7),
+    rgba(27, 116, 156, 0.1),
+    rgba(27, 116, 156, 0.7)
+    );
+}
