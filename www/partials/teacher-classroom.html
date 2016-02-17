@@ -1,0 +1,67 @@
+<ion-view class=teacherStatsView>
+  <ion-nav-buttons side='primary'>
+    <button class="button icon icon-left" nav-direction="back" ui-sref="home">
+      <i class="icon ion-chevron-left"></i>
+      Home
+    </button>
+  </ion-nav-buttons>
+  <ion-nav-title>
+    Class #{{classID}}
+  </ion-nav-title>
+  <div class="bar bar-subheader bar-stable">
+    <div class="button-bar">
+      <button class="button button-balanced" ng-click="startRecording()">Start Recording</button>
+      <button class="button button-energized" ng-click="pauseRecording()">Pause Recording</button>
+      <button class="button button-assertive" ng-click="endClass()">End Class</button>
+    </div>
+  </div>
+
+
+  <ion-content class="has-header has-subheader">
+    <div class="card" ng-hide="isRecording">
+      <div class="item text-center item-text-wrap">
+        <div class="row">
+          <div class="col">
+            <h2>Use the controls above to record class data...</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <time-data data="{{timeData}}" ng-show="isRecording"></time-data>
+    <div class="card" ng-hide="students.length">
+      <div class="item text-center item-text-wrap">
+        <div class="row">
+          <div class="col">
+            <h2>Waiting for students to join...</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <student-circles students="{{students}}" percentage="{{percentage}}" ng-show="students.length"></student-circles>
+  </ion-content>
+</ion-view>
+
+
+<!-- <div class="teacherBackground" ng-init="loading = false">
+  <div class="teacherHeader">
+    <div class="row">
+      <div class="col-xs-12 endClassButton text-center">
+        <h1 ng-click="endClass()" ng-disabled="loading">{{loading ? 'One Moment' : 'End Class'}}</h1>
+      </div>
+    </div>
+  </div>
+  <div class="studentCirclesArea">
+    <div class="col-xs-12">
+      <h1 class="text-center">
+        Classroom ID: &nbsp;{{classID}}
+      </h1>
+    </div>
+    <div class="col-xs-4 text-center">
+      <h3 ng-if="points == 0 || !points">...</h3>
+      <h3 ng-if="points > 0">Class Points: {{points}}</h3>
+    </div>
+    <div class="col-xs-4 text-center">
+      <h1>{{percentage || "..."}}</h1>
+    </div>
+  </div>
+</div> -->

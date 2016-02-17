@@ -2,16 +2,27 @@ angular.module('app')
 
 .controller("splashCtrl", function(Auth, currentAuth, $state, $scope, $firebaseObject, $ionicModal, $ionicNavBarDelegate) {
 
-  // if (currentAuth){
-  //   $state.go('home');
-  // }
+  Auth.$onAuth(function(authData) {
+  if (authData === null) {
+    console.log('Not logged in yet');
+  } else {
+    console.log('Logged in as', authData.uid);
+  }
+  // This will display the user's name in our view
+  $scope.authData = authData;
+});
+
+  if (currentAuth){
+    $state.go('home');
+  }
 
   var usersRef = new Firebase('https://getitgotit.firebaseio.com/users')
   var users = $firebaseObject(usersRef);
 
   $scope.loginWithFacebook = function(){
     $scope.loggingIn = true;
-    Auth.$authWithOAuthPopup("facebook").then(function(authData) {
+    Auth.$authWithOAuthRedirect("facebook").then(function(authData) {
+      console.log('authData', authData);
       if (!users[authData.uid]){
         users[authData.uid] = {
           name: authData.facebook.displayName,
@@ -25,16 +36,40 @@ angular.module('app')
         users.$save();
       }
       return $state.go('home');
-    }).catch(function(error){
-      console.log(error);
-      $scope.loggingIn = false;
-    })
+    }).catch(function(error) {
+      if (error.code === "TRANSPORT_UNAVAILABLE") {
+        Auth.$authWithOAuthPopup("facebook").then(function(authData) {
+          // User successfully logged in.
+          if (!users[authData.uid]){
+            users[authData.uid] = {
+              name: authData.facebook.displayName,
+              avatar: authData.facebook.profileImageURL,
+              points: 0,
+              helpee: false,
+              helper: false,
+              helping: null,
+              teacher: false
+            }
+            users.$save();
+          }
+          return $state.go('home');
+        }).catch(function(error){
+          console.log(error);
+          $scope.loggingIn = false;
+        });
+      } else {
+        // Another error occurred
+        console.log(error);
+        $scope.loggingIn = false;
+      }
+    });
+
   }
 
   $scope.loginWithEmail = function(user){
     $scope.loggingIn = true;
-    debugger;
     Auth.$authWithPassword(user).then(function(authData) {
+      $scope.closeModal();
       return $state.go('home');
     }).catch(function(error) {
       if (error == 'Error: The specified user does not exist.'){
@@ -64,6 +99,7 @@ angular.module('app')
         }
         users.$save();
       }
+      $scope.closeModal();
       return $state.go('home');
     }).catch(function(error) {
       console.log(error);

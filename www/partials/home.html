@@ -17,17 +17,28 @@
   <ion-slides class="has-header" options="options" slider="data.slider">
 
     <ion-slide-page class="has-header box teacherSlide">
-        <div class="list card">
+        <div class="list card" ng-show="user">
           <div class="card text-center">
-            <h1>Are you teaching today?</h1>
-            <p>If not, swipe right.</p>
-            <p>Otherwise, start a new class instance or view your stats page.</p>
+            <div ng-hide="user.teacher">
+              <h1>Are you teaching today?</h1>
+              <p>If not, swipe right.</p>
+              <p>Otherwise, start a new class instance or view your stats page.</p>
+            </div>
+            <div ng-show="user.teacher">
+              <h1>What's Up?</h1>
+              <p>Head back to class or view your stats page.</p>
+            </div>
             <div class="item item-text-wrap">
               <div class="row">
                 <div class="col-80 col-offset-10">
-                  <button class="button button-full button-large button-positive item-icon-left item-icon-right" nav-direction="back" ng-click="startNewClass()">
+                  <button class="button button-full button-large button-positive item-icon-left item-icon-right" ng-click="startNewClass()" ng-hide="user.teacher">
                     <i class="icon ion-star"></i>
                     Start A Class
+                    <i class="icon ion-star"></i>
+                  </button>
+                  <button class="button button-full button-large button-positive item-icon-left item-icon-right" nav-direction="forward" ui-sref="teacher-classroom({classID: user.teacher})" ng-show="user.teacher">
+                    <i class="icon ion-star"></i>
+                    Back To Class
                     <i class="icon ion-star"></i>
                   </button>
                 </div>
@@ -51,7 +62,7 @@
 
     </ion-slide-page>
 
-    <ion-slide-page class="has-header box studentSlide">
+    <ion-slide-page class="has-header box studentSlide" ng-hide="user.teacher">
 
       <div class="list card">
         <div class="card text-center">
@@ -63,7 +74,7 @@
               <div class="col-80 col-offset-10">
                 <div class="list list-inset">
                   <label class="item item-input">
-                    <input ng-model="classID" type="text" placeholder="Class ID">
+                    <input ng-model="studentClassID" type="text" placeholder="Class ID">
                   </label>
                 </div>
               </div>
@@ -73,7 +84,7 @@
           <div class="item">
             <div class="row">
               <div class="col-80 col-offset-10">
-                <button class="button button-full button-large button-positive" ng-click="goToClass()">Join!</button>
+                <button class="button button-full button-large button-positive" ng-click="goToClass(studentClassID)">Join!</button>
               </div>
             </div>
           </div>

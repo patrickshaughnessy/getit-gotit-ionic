@@ -8,7 +8,7 @@ angular.module('app', ['ionic', 'firebase', 'naif.base64'])
   //
   // delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
-  $urlRouterProvider.otherwise("/stats");
+  $urlRouterProvider.otherwise("/");
 
   $stateProvider
     .state('splash', {
@@ -38,16 +38,16 @@ angular.module('app', ['ionic', 'firebase', 'naif.base64'])
         }]
       }
     })
-    // .state('teacher-classroom', {
-    //   url: "/teacher-classroom/:classID",
-    //   templateUrl: "partials/teacher-classroom.html",
-    //   controller: "teacherCtrl",
-    //   resolve: {
-    //     "currentAuth": ["Auth", function(Auth) {
-    //       return Auth.$requireAuth();
-    //     }]
-    //   }
-    // })
+    .state('teacher-classroom', {
+      url: "/teacher-classroom/:classID",
+      templateUrl: "partials/teacher-classroom.html",
+      controller: "teacherCtrl",
+      resolve: {
+        "currentAuth": ["Auth", function(Auth) {
+          return Auth.$requireAuth();
+        }]
+      }
+    })
     // .state('student-classroom', {
     //   url: "/student-classroom/:classID",
     //   templateUrl: "partials/student-classroom.html",

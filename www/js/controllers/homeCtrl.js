@@ -3,15 +3,7 @@ angular.module('app')
 
   var userRef = new Firebase(`https://getitgotit.firebaseio.com/users/${currentAuth.uid}`);
   var user = $firebaseObject(userRef);
-  user.$bindTo($scope, 'user')
-  // .then(function(){
-  //   // make sure user didn't use back button to leave
-  //   $timeout(function(){
-  //     if ($scope.user.teacher){
-  //       $state.go('teacher-classroom', {classID: $scope.user.teacher});
-  //     }
-  //   }, 300)
-  // })
+  user.$bindTo($scope, 'user');
 
   $scope.options = {
     loop: false,
@@ -64,20 +56,21 @@ angular.module('app')
 
   }
 
-  $scope.goToClass = function(){
+  $scope.goToClass = function(id){
     $scope.loading = true;
     // wait for firebase connection, return if not valid input
-    if (!$scope.user || !$scope.classrooms || !$scope.classID) {
+    if (!$scope.user || !$scope.classrooms || !id) {
       $scope.loading = false;
       return;
     }
 
-    var classID = $scope.classID.replace(/(\d{3})(\d{3})(\d{3})/, '$1-$2-$3');
+    var classID = id.replace(/(\d{3})(\d{3})(\d{3})/, '$1-$2-$3');
 
     // if no class with that ID exists, show error message
     if (!$scope.classrooms[classID]){
       $scope.loading = false;
-      return swal('Oops', 'No class exists with that ID. Did you type it correctly?', 'error');
+      return
+      // return swal('Oops', 'No class exists with that ID. Did you type it correctly?', 'error');
     };
 
     // otherwise, log them into the class
@@ -104,6 +97,10 @@ angular.module('app')
   $scope.rejoinClass = function(){
     $scope.loading = true;
     $state.go('student-classroom', {classID: $scope.user.class.id});
+  }
+
+  $scope.teacherRejoinClass = function(classID){
+    return `/teacher-classroom/${classID}`;
   }
 
   $scope.logout = function(){
