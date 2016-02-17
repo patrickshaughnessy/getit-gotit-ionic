@@ -10,11 +10,18 @@
   </ion-nav-title>
 
   <ion-content>
-    <div class="row row-center">
+
+    <div class="row responsive-sm">
       <div class="col col-center">
-        <div class="list card" ng-show="user">
-          <div class="item item-body text-center">
+        <div class="card" ng-show="user">
+          <div class="item text-center">
             <img class="image-list-thumb" ng-src="{{user.avatar}}">
+          </div>
+        </div>
+      </div>
+      <div class="col col-top">
+        <div class="card" ng-show="user">
+          <div class="item text-center item-text-wrap">
             <h1>{{user.name}}</h1>
             <h2>{{user.points}} points</h2>
             <p>Change Your Avatar Picture</p>

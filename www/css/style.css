@@ -44,24 +44,17 @@
 
 
 .profileView {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/home.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: linear-gradient(
+    to bottom,
+    rgba(27, 116, 156, 0.7),
+    rgba(27, 116, 156, 0.1),
+    rgba(27, 116, 156, 0.7)
+    );
 }
 
-.profileView .item-body {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
-}
-.profileView .list.card {
-  background: transparent;
-  border-radius: 50vw;
-}
-.profileView h1, .profileView h2, .profileView p {
-  color: white
-}
 .profileView .image-list-thumb {
-  max-height: 50vh;
-  max-width: 50vw;
+  max-height: 100%;
+  max-width: 100%;
 }
 
 
