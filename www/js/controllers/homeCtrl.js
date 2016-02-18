@@ -1,5 +1,5 @@
 angular.module('app')
-.controller("homeCtrl", function(currentAuth, Auth, $state, $rootScope, $scope, $firebaseObject, $firebaseArray, $timeout) {
+.controller("homeCtrl", function(currentAuth, Auth, $state, $rootScope, $scope, $firebaseObject, $firebaseArray, $timeout, $ionicLoading, $ionicPopup) {
 
   var userRef = new Firebase(`https://getitgotit.firebaseio.com/users/${currentAuth.uid}`);
   var user = $firebaseObject(userRef);
@@ -21,6 +21,7 @@ angular.module('app')
   var classroomsRef = new Firebase("https://getitgotit.firebaseio.com/classrooms");
   var classrooms = $firebaseObject(classroomsRef);
   classrooms.$bindTo($scope, 'classrooms');
+
   var classroomsIDsRef = new Firebase("https://getitgotit.firebaseio.com/classroomsIDs");
   var classroomsIDs = $firebaseObject(classroomsIDsRef);
   classroomsIDs.$bindTo($scope, 'classroomsIDs');
@@ -34,45 +35,45 @@ angular.module('app')
   }
 
   $scope.startNewClass = function(){
+    $ionicLoading.show({template: 'Creating the class instance...'})
     if (!$scope.user || !$scope.classrooms) {
-      return;
+      return $ionicLoading.hide();
     }
 
     if (!$scope.user.teacher){
       var id = genClassID();
-      $scope.classroomsIDs[id] = {
-        teacher: currentAuth.uid
-      };
-      $scope.classrooms[id] = {
-        teacher: currentAuth.uid
-      };
+      $scope.classroomsIDs[id] = { teacher: currentAuth.uid };
+      $scope.classrooms[id] = { teacher: currentAuth.uid };
       $scope.user.teacher = id;
+      $ionicLoading.hide();
       $state.go('teacher-classroom', {classID: id});
     } else {
-      // cancel loading
+      $scope.showAlert({message: 'Something went wrong.'});
+      return $ionicLoading.hide();
     }
-
   }
 
-  $scope.goToClass = function(id){
+  $scope.studentClass = {};
+  $scope.goToClass = function(){
     // wait for firebase connection, return if not valid input
-    if (!$scope.user || !$scope.classrooms || !id) {
-      return;
+    $ionicLoading.show({template: 'Joining class...'})
+    if (!$scope.user || !$scope.classrooms || !$scope.studentClass.id) {
+      return $ionicLoading.hide();
     }
-
-    var classID = id.replace(/(\d{3})(\d{3})(\d{3})/, '$1-$2-$3');
+    console.log($scope.studentClass);
+    var classID = $scope.studentClass.id.toString().replace(/(\d{3})(\d{3})(\d{3})/, '$1-$2-$3');
 
     // if no class with that ID exists, show error message
     if (!$scope.classrooms[classID]){
-      return
-      // return swal('Oops', 'No class exists with that ID. Did you type it correctly?', 'error');
+      $ionicLoading.hide();
+      $scope.studentClass.id = '';
+      return $scope.showAlert({message: 'No class exists with that ID. Did you type it correctly?'});
     };
 
     // otherwise, log them into the class
     var studentsRef = new Firebase(`https://getitgotit.firebaseio.com/classrooms/${classID}/students`);
     var students = $firebaseArray(studentsRef);
     students.$loaded().then(function(list){
-      // set session points to 0 for student
       var student = {};
       angular.copy($scope.user, student);
       student.points = 0;
@@ -84,6 +85,7 @@ angular.module('app')
           id: classID,
           key: key
         };
+        $ionicLoading.hide();
         $state.go('student-classroom', {classID: classID});
       });
     })
@@ -97,5 +99,17 @@ angular.module('app')
     Auth.$unauth();
     $state.go('splash');
   }
+
+  $scope.showAlert = function(error) {
+    var alertPopup = $ionicPopup.alert({
+      title: 'Oops!',
+      template: error.message
+    });
+
+    alertPopup.then(function(res) {
+      // res = true; popup closed
+    });
+  };
+
 
 });
