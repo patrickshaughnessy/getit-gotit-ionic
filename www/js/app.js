@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app', ['ionic', 'firebase', 'naif.base64'])
+angular.module('app', ['ionic', 'firebase', 'naif.base64', 'ngCordovaOauth'])
 
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 
@@ -107,8 +107,8 @@ angular.module('app', ['ionic', 'firebase', 'naif.base64'])
     }
 
   });
-  
-  ionic.Platform.fullScreen(false, true);
+
+
 
   $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
     // We can catch the error thrown when the $requireAuth promise is rejected

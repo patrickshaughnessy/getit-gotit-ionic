@@ -1,6 +1,6 @@
 angular.module('app')
 
-.controller("splashCtrl", function(Auth, currentAuth, $state, $scope, $firebaseObject, $ionicModal, $ionicNavBarDelegate) {
+.controller("splashCtrl", function($cordovaOauth, Auth, currentAuth, $state, $scope, $firebaseObject, $ionicModal, $ionicNavBarDelegate) {
 
   if (currentAuth){
     $state.go('home');
@@ -11,21 +11,36 @@ angular.module('app')
 
 
   $scope.loginWithFacebook = function(){
-    Auth.$authWithOAuthRedirect("facebook").then(function(authData) {
-      return $state.go('home');
-    }).catch(function(error) {
-      if (error.code === "TRANSPORT_UNAVAILABLE") {
-        Auth.$authWithOAuthPopup("facebook").then(function(authData) {
-          // User successfully logged in.
-          return $state.go('home');
-        }).catch(function(error){
-          console.log(error);
-        });
-      } else {
-        // Another error occurred
-        console.log(error);
-      }
-    });
+    console.log('loggin in facebook');
+
+    $cordovaOauth.facebook('1554219404895973', ["email"]).then(function(result) {
+      Auth.$authWithOAuthToken("facebook", result.access_token).then(function(authData) {
+        return $state.go('home');
+      }, function(error) {
+        console.error("ERROR: " + error);
+      });
+    }, function(error) {
+    console.log("ERROR: " + error);
+  });
+
+    //
+    // Auth.$authWithOAuthRedirect("facebook").then(function(authData) {
+    //   console.log('logged in facebook', authData);
+    //   return $state.go('home');
+    // }).catch(function(error) {
+    //   console.log(error);
+    //   if (error.code === "TRANSPORT_UNAVAILABLE") {
+    //     Auth.$authWithOAuthPopup("facebook").then(function(authData) {
+  //       // User successfully logged in.
+    //       return $state.go('home');
+    //     }).catch(function(error){
+    //       console.log(error);
+    //     });
+    //   } else {
+    //     // Another error occurred
+    //     console.log(error);
+    //   }
+    // });
 
   }
 

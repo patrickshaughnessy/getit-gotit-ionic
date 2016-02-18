@@ -35,19 +35,6 @@ angular.module('app')
       }
     });
 
-
-    // if (!$scope.users[authData.uid]){
-    //   $scope.users[authData.uid] = {
-    //     name: authData.password.email.replace(/@.*/, ''),
-    //     avatar: 'assets/defaultPic.png',
-    //     points: 0,
-    //     helpee: false,
-    //     helper: false,
-    //     helping: null,
-    //     teacher: false
-    //   }
-    // }
-
     return $firebaseAuth(ref);
   }
 ]);

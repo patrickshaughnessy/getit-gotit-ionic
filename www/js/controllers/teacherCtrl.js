@@ -87,14 +87,17 @@ angular.module('app')
   }
 
   $scope.endClass = function(){
-    $interval.cancel($scope.isRecording);
-
-    classroom.$remove();
-
+    if ($scope.isRecording){
+      $interval.cancel($scope.isRecording);
+    }
     $scope.user.teacher = false;
 
+    classroom.$remove().then(function(){
+      $state.go('home');
+    });
+
+
     // document.querySelectorAll("link[rel*='icon'")[0].setAttribute('href', "assets/greencircle.ico");
-    $state.go('home');
 
   }
 

@@ -10,7 +10,7 @@
     </div>
     <div class="row responsive-sm">
       <div class="col col-center text-center">
-        <button class="button button-positive" role="button" ng-click="loginWithFacebook()" ng-disabled="loggingIn" >{{loggingIn ? 'Logging In' : 'Login With Facebook'}}</button>
+        <button class="button button-positive" role="button" ng-click="loginWithFacebook()">Login With Facebook</button>
       </div>
       <div class="col col-center text-center">
         <button class="button button-stable" type="button" ng-click="openModal($event)">Login With Email</button>
@@ -19,10 +19,12 @@
   </ion-content>
 </ion-view>
 
+
 <script id="my-modal.html" type="text/ng-template">
   <ion-modal-view>
     <ion-header-bar>
       <h1 class="title">Enter Your Email And Password Below</h1>
+      <button class="button icon ion-close-round" ng-click="closeModal($event)"></button>
     </ion-header-bar>
     <ion-content>
       <div class="list list-inset">
